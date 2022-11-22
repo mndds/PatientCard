@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Client>
+
+<h2>Список пациентов</h2>
+
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addClient">
+    Добавить пациента
+</button>
+
+
+<table class="table table-bordered table-hover">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.IIN)</th>
+            <th>@Html.DisplayNameFor(model => model.Adress)</th>
+            <th>@Html.DisplayNameFor(model => model.Phone)</th>
+        </tr>
+    
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.IIN</td>
+            <td>@item.Adress</td>
+            <td>@item.Phone</td>
+            <td>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="@("#editClient-"+item.Id)" data-url="@Url.Action($"Edit/{item.Id}")">
+                    Редактировать
+                </button>
+                @await Html.PartialAsync("_EditClientPartialView", item)
+
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#deleteClient-"+item.Id)" data-url="@Url.Action($"Delete/{item.Id}")">
+                    Удалить
+                </button>
+                @await Html.PartialAsync("_DeleteClientPartialView", item)
+            </td>
+        </tr>
+    }
+</table>
+
+@await Html.PartialAsync("_ClientPartialView.cshtml", new Client())

@@ -1,0 +1,56 @@
+﻿@model Client
+
+<div class="modal fade" id="addClient" aria-labelledby="addClientLabel" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="addClientLabel">Добавление пациента</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       
+          <form asp-action="Create" method="post">
+
+              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              <div class="form-group">
+                  <label asp-for="FirstName" class="control-label"></label>
+                  <input asp-for="FirstName" class="form-control" />
+                  <span asp-validation-for="FirstName" class="text-danger"></span>
+              </div>
+
+              <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                  <input asp-for="LastName" class="form-control" />
+                  <span asp-validation-for="LastName" class="text-danger"></span>
+              </div>
+
+              <div class="form-group">
+                  <label asp-for="IIN" class="control-label"></label>
+                  <input asp-for="IIN" type="number" class="form-control" />
+                  <span asp-validation-for="IIN" class="text-danger"></span>
+              </div>
+
+              <div class="form-group">
+                  <label asp-for="Adress" class="control-label"></label>
+                  <input asp-for="Adress" class="form-control" />
+                  <span asp-validation-for="Adress" class="text-danger"></span>
+              </div>
+              
+              <div class="form-group">
+                  <label asp-for="Phone" class="control-label"></label>
+                  <input asp-for="Phone" class="form-control" />
+                  <span asp-validation-for="Phone" class="text-danger"></span>
+              </div>     
+              
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+              </div>   
+         </form>
+    </div>
+  </div>
+</div>
+</div>
