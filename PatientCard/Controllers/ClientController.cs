@@ -12,12 +12,12 @@ namespace PatientCard.Controllers {
             db = context;
         }
         public IActionResult Index() {
-            return View( db.Clients.ToList());
+            return View(db.Clients.ToList());
         }
 
-        public IActionResult Create() {
-            return PartialView("_ClientPartialView", new Client());
-        }
+            public IActionResult Create() {
+                return PartialView("_ClientPartialView", new Client());
+            }
 
         [HttpPost]
         public IActionResult Create(Client client) {
@@ -28,7 +28,6 @@ namespace PatientCard.Controllers {
             }
             return View(client);        
         }
-
 
         public IActionResult Edit(int? id) {
             if (id != null) {
@@ -65,8 +64,7 @@ namespace PatientCard.Controllers {
             
                 db.Clients.Remove(client);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Client");
-            
+                return RedirectToAction("Index", "Client");           
             
         }
 

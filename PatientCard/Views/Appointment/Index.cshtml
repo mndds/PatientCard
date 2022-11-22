@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PatientCard.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index1";
+}
+
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addAppointment">
+    Добавить запись
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor.FirstName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor.LastName)
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor.Specialist)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Client.FirstName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Client.LastName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Diagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complaints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.Specialist)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diagnosis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complaints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#deleteAppointment-"+item.id)" data-url="@Url.Action($"Delete/{item.id}")">
+                        Удалить
+                    </button>
+                    @await Html.PartialAsync("_DeleteAppointmentPartialView", item)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@await Html.PartialAsync("_AppointmentPartialView.cshtml",  new Appointment())
