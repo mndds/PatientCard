@@ -15,56 +15,75 @@ namespace PatientCard.Controllers {
             return View(db.Clients.ToList());
         }
 
-            public IActionResult Create() {
-                return PartialView("_ClientPartialView", new Client());
-            }
+        public IActionResult Create() {
+            return PartialView("_ClientPartialView", new Client());
+        }
 
         [HttpPost]
         public IActionResult Create(Client client) {
-            if (ModelState.IsValid) {
-                db.Clients.Add(client);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Client");
-            }
-            return View(client);        
+            try {
+                if (ModelState.IsValid) {
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Client");
+                }
+                return View(client);
+            } catch (Exception ex) {
+                return Content(ex.Message);
+            }                   
         }
 
         public IActionResult Edit(int? id) {
-            if (id != null) {
-                Client? client = db.Clients.FirstOrDefault(p => p.Id == id);
-                if (client != null) {
-                    return PartialView("_EditClientPartialView", client);
+            try {
+                if (id != null) {
+                    Client? client = db.Clients.FirstOrDefault(p => p.Id == id);
+                    if (client != null) {
+                        return PartialView("_EditClientPartialView", client);
+                    }
                 }
-            }
-            return NotFound();
+                return NotFound();
+            } catch (Exception ex) {
+                return Content(ex.Message);
+            }            
         }
 
         [HttpPost]
         public IActionResult Edit(Client client) {
-            if (ModelState.IsValid) {
-                db.Clients.Update(client);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Client");
-            }
-            return View(client);
+            try {
+                if (ModelState.IsValid) {
+                    db.Clients.Update(client);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Client");
+                }
+                return View(client);
+            } catch (Exception ex) {
+                return Content(ex.Message);
+            }        
         }
         
         public IActionResult Delete(int? id) {
-            if (id != null) {
-                Client? client = db.Clients.FirstOrDefault(p => p.Id == id);
-                if (client != null) {                   
-                    return PartialView("_DeleteClientPartialView", client);
+            try {
+                if (id != null) {
+                    Client? client = db.Clients.FirstOrDefault(p => p.Id == id);
+                    if (client != null) {
+                        return PartialView("_DeleteClientPartialView", client);
+                    }
                 }
-            }
-            return NotFound();
+                return NotFound();
+            } catch (Exception ex) {
+                return Content(ex.Message);
+            }            
         }
 
         [HttpPost]
         public IActionResult Delete(Client client) {
-            
+            try {
                 db.Clients.Remove(client);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Client");          
+                return RedirectToAction("Index", "Client");
+            } catch (Exception ex) {
+                return Content(ex.Message);
+            }                 
         }
     }
 }
