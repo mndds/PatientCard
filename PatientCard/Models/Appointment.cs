@@ -3,18 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PatientCard.Models {
 
-    public class Appointment {
-
-        /*public int Id { get; set; }
-        public Doctor? Doctor { get; set; }
-        public Client? client { get; set; }
-        public string? Diagnosis { get; set; }
-        public string? Complaints { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }*/
-
-        
+    public class Appointment {        
         public int id { get; set; }
 
         [Display(Name = "Id доктора")]

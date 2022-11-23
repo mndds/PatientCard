@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<PatientCard.Models.Appointment>
 
 @{
-    ViewData["Title"] = "Index1";
+    ViewData["Title"] = "Прием";
 }
 
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addAppointment">
     Добавить запись
 </button>
 
-<table class="table">
+<table class="table table-striped table-hover" id="Exampledatatable">
     <thead>
         <tr>
             <th>
@@ -79,9 +79,6 @@
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#deleteAppointment-"+item.id)" data-url="@Url.Action($"Delete/{item.id}")">
                         Удалить
                     </button>
@@ -94,3 +91,16 @@
 
 
 @await Html.PartialAsync("_AppointmentPartialView.cshtml",  new Appointment())
+
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/af-2.5.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/af-2.5.1/datatables.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $("#Exampledatatable").DataTable();
+        })
+    </script>
+
+}

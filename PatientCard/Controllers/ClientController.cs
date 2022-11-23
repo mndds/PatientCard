@@ -64,13 +64,7 @@ namespace PatientCard.Controllers {
             
                 db.Clients.Remove(client);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Client");           
-            
+                return RedirectToAction("Index", "Client");          
         }
-
-
-
-
-
     }
 }

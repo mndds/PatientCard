@@ -38,9 +38,7 @@
                         <label asp-for=Diagnosis class="control-label"></label>
                         <input asp-for="Diagnosis" class="form-control" />
                         <span asp-validation-for="Diagnosis" class="text-danger"></span>
-                    </div>
-               
-                    
+                    </div>                    
 
                     @*<div class="form-group">
                         <label asp-for=Doctor.LastName class="control-label"> Пациент</label>                        
@@ -52,7 +50,13 @@
                                 }
                             <</select>
                     </div>*@
-                  
+
+                    <div class="form-group">
+                        <label asp-for=CreatedDate class="control-label"></label>
+                        @Html.EditorFor(model => model.CreatedDate, new { AddHtmlAttributeValue = new {@class = "datepicker"}})
+                        
+                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                    </div>                  
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -66,3 +70,16 @@
 
 
 
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js">  </script>
+    <script>
+        $(document).ready(function () {
+           $(".datepicker").datepicker({
+              
+              dateFormat: "dd-mm-yy",
+              changemonth: true,
+              changeyear: true
+              });
+           });
+    </script>
+}

@@ -25,7 +25,6 @@ namespace PatientCard.Models {
         [Required(ErrorMessage = "Поле обязательно для ввода!")]
         [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", ErrorMessage = "Некорректный номер телефона")]
         public string? Phone { get; set; }
-
         public List<Doctor> Doctors { get; set; } = new();
         public List<Appointment> Appointments { get; set; } = new();
         
