@@ -1,4 +1,4 @@
-﻿@model Appointment
+@model Appointment
 
 <div class="modal fade" id="addAppointment" aria-labelledby="addAppointmentLabel" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -15,18 +15,28 @@
                 <form asp-action="Create" method="post">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  
 
                     <div class="form-group">
-                        <label asp-for="DoctorId" class="control-label"></label>
-                        <input asp-for="DoctorId" class="form-control" />
-                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                        <label class="control-label"> Доктор </label>
+                        <br />
+                        <select name="doctorId">
+                                @foreach (var item in ViewBag.Doctors) {
+                                <option value="@item.Id.ToString()">@item.LastName.ToString()</option>
+                                }
+                            </select>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="ClientId" class="control-label"></label>
-                        <input asp-for="ClientId" class="form-control" />
-                        <span asp-validation-for="ClientId" class="text-danger"></span>
-                    </div>
+                        <label class="control-label"> Пациент </label>
+                        <br />                        
+                        <select name="clientId">
+                            @foreach (var item in ViewBag.Clients)
+                            {
+                                <option value="@item.Id.ToString()">@item.LastName.ToString()</option>
+                            }
+                        </select>
+                    </div>                    
 
                     <div class="form-group">
                         <label asp-for=Complaints class="control-label"></label>
@@ -40,16 +50,7 @@
                         <span asp-validation-for="Diagnosis" class="text-danger"></span>
                     </div>                    
 
-                    @*<div class="form-group">
-                        <label asp-for=Doctor.LastName class="control-label"> Пациент</label>                        
-
-                            <select id="MovieType" name="lastName">
-                                @foreach (var item in ViewBag.LastName) {
-                                string value = @item.Client.LastName.ToString();
-                                <option value="@value">@value</option>
-                                }
-                            <</select>
-                    </div>*@
+                    
 
                     <div class="form-group">
                         <label asp-for=CreatedDate class="control-label"></label>
