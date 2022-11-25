@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PatientCard.Models;
 using PatientCard.Repository;
@@ -19,9 +19,9 @@ namespace PatientCard.Controllers {
         }
         public IActionResult Index() {
 
-            //Реализация с помощью DropDown увеличит обращения к бд?
-            //ViewBag.Clients = db.Clients.ToList();
-            //ViewBag.Doctors = db.Doctors.ToList();
+           
+            ViewBag.Clients = db.Clients.ToList();       
+            ViewBag.Doctors = db.Doctors.ToList();
 
             try {
                 var res = db.Appointments.Include("Doctor").Include("Client").ToList();
@@ -37,14 +37,16 @@ namespace PatientCard.Controllers {
 
 
         [HttpPost]
-        public IActionResult Create(Appointment appointment) {
+        public IActionResult Create(Appointment appointment, string doctorId, string clientId) {
             try {
                 if (ModelState.IsValid) {
+                    appointment.DoctorId = Convert.ToInt32(doctorId);
+                    appointment.ClientId = Convert.ToInt32(clientId);
                     db.Appointments.Add(appointment);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Appointment");
                 }
-                return View(appointment);
+                return View("Index",appointment);
             } catch (Exception ex) {
                 return Content(ex.Message);                
             }           
